@@ -1,119 +1,128 @@
-# **WikiGifty**
+# WikiGifty
 
-WikiGifty is an Android application designed for personalized gift management and social interactions. The app enables users to maintain their profiles, manage both public and private wish lists, and interact with friends, all while leveraging Firebase for secure, real-time data storage and management.
-
----
-
-## **Features**
-
-### **1. User Authentication**
-- **Login & Registration**: Users can register with their email and unique user ID and securely log in using Firebase Authentication.
-- **Session Management**: Ensures the user remains logged in until they manually log out.
-
-### **2. Profile Management**
-- **Personalized Profile**: 
-  - Users can update their profile picture via gallery uploads and reset it to a default image.
-  - Displays user information such as name, birth date, and a dynamic birthday countdown.
-- **Tags Management**:
-  - Users can create custom tags prefixed with `#`.
-  - Tags are displayed interactively and can be deleted with a long press.
-- **Public Wish List**:
-  - Users can add products with links to their public wish list.
-  - Public wish list items can be clicked to open the provided link in a browser.
-
-### **3. Friends Management**
-- **Friend Requests**:
-  - Add friends by entering their unique user ID.
-  - Friends are displayed in a scrollable list with their names and birthday countdowns.
-- **Friend Profiles**:
-  - View detailed profiles of friends, including their public wish lists and tags.
-  - Open links directly from a friend's wish list.
-
-### **4. Private Wish List**
-- **Features**:
-  - Add private wish list items with fields for product name, link, and importance (via star rating).
-  - Items are stored securely in Firebase and are only visible to the user.
-- **Item Management**:
-  - Delete items directly from the list.
-  - Click links to open product pages in a browser.
-- **Empty State**:
-  - Shows a helpful prompt when the private wish list is empty.
-
-### **5. Logout**
-- Securely log out, clearing the user's session and returning them to the login screen.
+An Android app that demonstrates a clean Firebase Authentication flow with basic profile storage using Firebase Realtime Database. The project focuses on a simple, reliable login/registration experience, English-only UI strings, and small UX touches like loading indicators and input validation.
 
 ---
 
-## **Technologies Used**
+## Features (Implemented)
 
-### **Frontend**
-- **Kotlin**: Used for app logic and functionality.
-- **XML**: Designed UI layouts with a responsive and intuitive user experience.
-- **Glide**: Handles image loading and profile picture management.
-
-### **Backend**
-- **Firebase Authentication**: For user sign-in, sign-out, and registration.
-- **Firebase Realtime Database**: Stores and synchronizes user data in real time.
-- **Firebase Storage**: Manages profile image uploads and retrieval.
-
----
-
-## **App Architecture**
-- **Pattern**: Follows a **MVVM (Model-View-ViewModel)** structure.
-  - **Model**: Data classes such as `WishItem` and `Friend` manage app data.
-  - **View**: XML layouts for activity and fragment interfaces.
-  - **ViewModel**: Business logic implemented in Kotlin files.
-
----
-
-## **How to Run the App**
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/andimsewon/WikiGifty.git
-   ```
-2. Open the project in **Android Studio**.
-3. Configure Firebase:
-   - Add `google-services.json` to the `app/` directory.
-   - Ensure Firebase Realtime Database and Authentication are enabled.
-4. Build and run the app on an emulator or physical device.
+- Authentication
+  - Email/Password Registration and Login (Firebase Auth)
+  - Session persistence (auto-route on app start)
+  - Logout from Main screen
+- Profile
+  - Store basic profile data on sign-up (name, birth date, phone, email) in Realtime Database
+  - View profile data after sign-up or from Main screen
+- UX/Quality
+  - English-only strings via resources
+  - Loading indicators and disabled buttons during async operations
+  - Input validation: email format, password length, birth date (YYYY-MM-DD), phone digits length
+  - Hide keyboard on submit
+  - Splash routes to Login or Main based on auth state
+- App setup
+  - Firebase App initialization via `Application` class (`WikiGiftyApp`)
+  - Realtime Database offline persistence enabled
+  - INTERNET permission added
 
 ---
 
-## **Screenshots**
+## Not in scope (yet)
 
-Include screenshots of:
-- Login and registration screens.
-- Profile screen with tags and public wish list.
-- Friends list and friend profiles.
-- Private wish list with item management.
+- Friends system, tags, public/private wish lists
+- Profile images / Glide / Firebase Storage
+- MVVM restructuring
 
----
-
-## **Future Enhancements**
-- Add notification reminders for upcoming friend birthdays.
-- Enable sharing of public wish lists with friends.
-- Integrate advanced analytics to suggest personalized gift recommendations.
-- Expand the UI for multi-language support.
+These can be added later as incremental features.
 
 ---
 
-## **Contributing**
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create a new branch for your feature/bug fix.
-3. Commit your changes and submit a pull request.
+## Tech Stack
+
+- Kotlin, XML layouts
+- Firebase Authentication, Firebase Realtime Database
+- Gradle Kotlin DSL
 
 ---
 
-## **License**
-This project is licensed under the [MIT License](LICENSE).
+## Project Structure (high level)
+
+- `app/src/main/java/com/example/wikigifty/`
+  - `WikiGiftyApp.kt` – Firebase init + DB persistence
+  - `SplashActivity.kt` – Route based on current user
+  - `LoginActivity.kt` – Sign-in with loading state and validation
+  - `RegisterActivity.kt` – Sign-up, profile save to DB, validation
+  - `MainActivity.kt` – Logged-in landing, profile navigation, logout
+  - `ProfileActivity.kt` – Read and render profile from DB
+- `app/src/main/res/layout/` – Activity XML layouts
+- `app/src/main/res/values/strings.xml` – English-only strings
 
 ---
 
-## **Acknowledgments**
-- Firebase for providing powerful backend services.
-- Glide for efficient image loading.
-- Android Studio for an amazing development environment.
+## Requirements
 
-Feel free to customize further based on your project name, repository link, and additional screenshots or features!
+- Android Studio latest (Giraffe/Koala+)
+- Android SDK: minSdk 24, targetSdk 34
+- Java/Kotlin: JVM target 11
+
+---
+
+## Setup & Run
+
+1) Clone
+```bash
+git clone https://github.com/andimsewon/WikiGifty.git
+cd WikiGifty
+```
+
+2) Firebase configuration
+- Create a Firebase project and enable Authentication (Email/Password) and Realtime Database.
+- Download `google-services.json` and place it in `app/`.
+- Ensure Realtime Database rules allow authenticated read/write for testing (adjust as needed).
+
+3) Build & run
+- Open the project in Android Studio and run on a device/emulator.
+
+---
+
+## Gradle/Plugins
+
+- Firebase Bill of Materials (BOM) manages Firebase versions
+- Applied `com.google.gms.google-services` plugin
+
+Key dependencies are declared in `app/build.gradle.kts`:
+- `platform("com.google.firebase:firebase-bom:...")`
+- `com.google.firebase:firebase-auth`
+- `com.google.firebase:firebase-database`
+
+---
+
+## Screens (current)
+
+- Splash: decides Login vs Main
+- Login: email/password sign-in, link to Register
+- Register: collect basic profile data and save to DB
+- Main: show simple welcome, navigate to Profile, logout
+- Profile: read and display user info
+
+---
+
+## Notes
+
+- `google-services.json` is intentionally git-ignored and must be provided locally.
+- DB persistence is enabled; first load requires network, subsequent reads may use cache.
+
+---
+
+## Roadmap (suggested)
+
+- ViewBinding adoption and MVVM structure
+- Profile photo (Firebase Storage) and Glide
+- Friends/tags and wish list features
+- Better error handling and retry patterns
+- Android 12+ SplashScreen API
+
+---
+
+## License
+
+MIT
