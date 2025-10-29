@@ -125,4 +125,5 @@ Key dependencies are declared in `app/build.gradle.kts`:
 
 ## License
 
-MIT
+Me Myself :)
+
