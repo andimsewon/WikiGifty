@@ -1,0 +1,26 @@
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android Studio
+.idea/
+*.iml
+local.properties
+
+# Logs
+*.log
+
+# Generated
+captures/
+output.json
+
+# Keystores
+*.jks
+*.keystore
+
+# Firebase/Google
+google-services.json
+
+# OS
+.DS_Store

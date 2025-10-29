@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">WikiGifty</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="birthdate_hint">Birthdate (YYYY-MM-DD)</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="view_profile">View Profile</string>
+    <string name="logout">Logout</string>
+    <string name="welcome">Welcome</string>
+    <string name="splash_subtitle">Your personal wishlist</string>
+
+    <!-- Toasts / messages -->
+    <string name="toast_login_success">Login successful!</string>
+    <string name="toast_login_failed">Login failed: %1$s</string>
+    <string name="toast_enter_email_password">Please enter email and password.</string>
+    <string name="toast_fill_all_fields">Please fill in all fields.</string>
+    <string name="toast_invalid_email">Invalid email address.</string>
+    <string name="toast_password_min_length">Password must be at least 6 characters.</string>
+    <string name="toast_register_success">Sign up successful!</string>
+    <string name="toast_db_error">Database error: %1$s</string>
+    <string name="toast_register_failed">Sign up failed: %1$s</string>
+    <string name="toast_passwords_not_match">Passwords do not match.</string>
+    <string name="toast_user_not_found_after_signup">Could not find user after sign up.</string>
+    <string name="profile_load_failed">Failed to load user info.</string>
+    <string name="label_name">Name: %1$s</string>
+    <string name="label_birthdate">Birth Date: %1$s</string>
+    <string name="label_phone">Phone: %1$s</string>
+    <string name="label_email">Email: %1$s</string>
+</resources>
